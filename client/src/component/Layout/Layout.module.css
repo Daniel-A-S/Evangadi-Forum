@@ -1,0 +1,26 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.headerLayout_container {
+    background-color: #f1f1f1;
+    height: 80px; 
+}
+
+.mainLayout_container {
+    display: flex;
+    flex: 1; 
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+

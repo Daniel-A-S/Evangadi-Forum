@@ -1,0 +1,27 @@
+
+
+.Header_container{
+    background-color: #f1f1f1;
+    display:flex;
+    Justify-content:space-between;
+    align-items:center;
+    max-width: 100%;
+}
+
+.Header_container img{
+    margin-left : 200px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.Link_container{
+    display:flex;
+    list-style:none;
+    margin-right:100px;
+    gap:10px;
+    color: black;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
