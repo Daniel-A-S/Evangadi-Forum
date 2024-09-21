@@ -1,7 +1,8 @@
 const dbConnection = require("../db/dbConfig");
 const { StatusCodes } = require("http-status-codes");
 
-async function askquestion(req, res) {
+
+async function askquestions(req, res) {
   const { questionid, userid, title, description, tag } = req.body;
 
   if (!title || !description) {
@@ -12,31 +13,35 @@ async function askquestion(req, res) {
 
   try {
     const existingQuestion = await dbConnection.query(
-      "SELECT questionid FROM questions WHERE questionid = ?",
-      [questionid]
+      "SELECT * FROM questions WHERE title = ?",
+      [title]
     );
 
-    if (existingQuestion.length>0) {
+    // Log the raw query result
+    console.log("Raw query result:", existingQuestion);
+
+    // Adjusting the check based on the query result structure
+    if (existingQuestion[0].length > 0) {
       return res.status(StatusCodes.BAD_REQUEST).json({
-        msg: "Question  already exists. Please ask a diffrent question.",
+        msg: "Question already exists. Please ask a different question.",
       });
     }
 
-    if (title.length > 50) {
+    if (title.length > 100) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: "Please limit your title to 10 characters." });
     }
 
-    if (description.length > 200) {
+    if (description.length > 600) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: "Please limit your description to 50 characters." });
     }
 
     await dbConnection.query(
-      "INSERT INTO questions (questionid, userid, title, description, tag) VALUES (?, ?, ?, ?, ?)",
-      [questionid, userid, title, description, tag]
+      "INSERT INTO questions (userid, title, description, tag) VALUES (?, ?, ?, ?)",
+      [userid, title, description, tag] // Removed questionid since it's auto-increment
     );
 
     return res
@@ -61,4 +66,4 @@ async function getquestions(req,res){
   }
 }
 
-module.exports = { askquestion,getquestions };
+module.exports = { askquestions,getquestions };

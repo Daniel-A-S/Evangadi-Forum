@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useRef } from 'react';
 import axios from "../../axiosConfig"
 import { Link, useNavigate } from 'react-router-dom';

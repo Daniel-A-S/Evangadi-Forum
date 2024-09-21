@@ -24,7 +24,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 
 // Question routes middleware
-app.use("/api/questions", authMiddleware, questionRoutes);
+app.use("/api/questions",  questionRoutes);
 
 async function start() {
   try {
